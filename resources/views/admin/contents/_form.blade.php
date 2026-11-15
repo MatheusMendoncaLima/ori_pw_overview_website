@@ -1,0 +1,15 @@
+<form method="post" action="{{ $action }}" class="admin-form" novalidate>
+    @csrf
+    @if($method !== 'POST') @method($method) @endif
+    <div class="form-section-heading"><span>01</span><div><h2>Conteúdo</h2><p>Escreva para leitura rápida e mantenha a linguagem clara.</p></div></div>
+    <div class="form-grid">
+        <div class="field-group"><label for="section">Seção <span>*</span></label><select id="section" name="section" required>@foreach($sections as $value => $label)<option value="{{ $value }}" @selected(old('section', $content->section) === $value)>{{ $label }}</option>@endforeach</select>@error('section')<small class="field-error">{{ $message }}</small>@enderror</div>
+        <div class="field-group"><label for="badge">Identificação curta</label><input id="badge" name="badge" type="text" maxlength="80" value="{{ old('badge', $content->badge) }}" placeholder="Ex.: PILAR 01 · ROTINA">@error('badge')<small class="field-error">{{ $message }}</small>@enderror</div>
+        <div class="field-group field-span"><label for="title">Título <span>*</span></label><input id="title" name="title" type="text" maxlength="180" value="{{ old('title', $content->title) }}" required>@error('title')<small class="field-error">{{ $message }}</small>@enderror</div>
+        <div class="field-group field-span"><label for="summary">Resumo <span>*</span></label><textarea id="summary" name="summary" rows="4" maxlength="6000" required>{{ old('summary', $content->summary) }}</textarea><small>Até 6.000 caracteres. Este texto aparece em destaque no site.</small>@error('summary')<small class="field-error">{{ $message }}</small>@enderror</div>
+        <div class="field-group field-span"><label for="details">Detalhes adicionais</label><textarea id="details" name="details" rows="8" maxlength="30000">{{ old('details', $content->details) }}</textarea><small>O HTML não é interpretado; o conteúdo aparece como texto.</small>@error('details')<small class="field-error">{{ $message }}</small>@enderror</div>
+        <div class="field-group"><label for="display_order">Ordem de exibição <span>*</span></label><input id="display_order" name="display_order" type="number" min="0" max="2147483647" value="{{ old('display_order', $content->display_order ?? 0) }}" required>@error('display_order')<small class="field-error">{{ $message }}</small>@enderror</div>
+        <div class="field-group"><label class="status-field" for="is_active"><input type="hidden" name="is_active" value="0"><input id="is_active" name="is_active" type="checkbox" value="1" @checked(old('is_active', $content->is_active ?? true))><span><strong>Publicar no site</strong><small>Conteúdos inativos continuam editáveis no painel.</small></span></label>@error('is_active')<small class="field-error">{{ $message }}</small>@enderror</div>
+    </div>
+    <div class="form-actions"><button class="button button-dark" type="submit"><span>{{ $submitLabel }}</span><span aria-hidden="true">↗</span></button><a href="{{ route('admin.contents.index') }}" class="quiet-link">Cancelar</a></div>
+</form>

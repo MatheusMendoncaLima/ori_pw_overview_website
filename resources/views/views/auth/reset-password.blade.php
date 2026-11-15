@@ -1,0 +1,6 @@
+@extends('layouts.guest')
+@section('title', 'Nova senha · ORI')
+@section('content')
+<h2>Escolha uma<br><em>nova senha.</em></h2><p class="auth-intro">Crie uma senha segura para continuar usando sua conta.</p>
+<form method="post" action="{{ route('password.store') }}" class="auth-form">@csrf<input type="hidden" name="token" value="{{ $request->route('token') }}"><div><x-input-label for="email" value="E-mail" /><x-text-input id="email" class="auth-input" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" /><x-input-error :messages="$errors->get('email')" class="field-error" /></div><div><x-input-label for="password" value="Nova senha" /><x-text-input id="password" class="auth-input" type="password" name="password" required autocomplete="new-password" /><x-input-error :messages="$errors->get('password')" class="field-error" /></div><div><x-input-label for="password_confirmation" value="Confirme a nova senha" /><x-text-input id="password_confirmation" class="auth-input" type="password" name="password_confirmation" required autocomplete="new-password" /><x-input-error :messages="$errors->get('password_confirmation')" class="field-error" /></div><div class="auth-actions"><button class="button button-dark" type="submit">Salvar nova senha <span aria-hidden="true">↗</span></button></div></form>
+@endsection
