@@ -1,29 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="admin-page-title font-semibold text-xl leading-tight">
-            {{ __('Profile') }}
-        </h2>
+        <x-eyebrow>Sua conta</x-eyebrow>
+        <h1 class="font-brand text-3xl font-extrabold tracking-tight">{{ __('Profile') }}</h1>
     </x-slot>
 
-    <div class="ori-profile-page py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="profile-panel p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
+    <div class="mx-auto max-w-4xl space-y-6 px-4 py-10 sm:px-6 lg:px-8">
+        @foreach(['update-profile-information-form', 'update-password-form', 'delete-user-form'] as $partial)
+            <div class="rounded-[20px] border border-base-300 bg-base-100 p-5 sm:p-8">
+                <div class="max-w-xl">@include('profile.partials.'.$partial)</div>
             </div>
-
-            <div class="profile-panel p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
-
-            <div class="profile-panel p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 </x-app-layout>

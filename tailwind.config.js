@@ -14,6 +14,16 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Nunito Sans', 'Arial', ...defaultTheme.fontFamily.sans],
+                brand: ['Nunito', 'Arial', ...defaultTheme.fontFamily.sans],
+            },
+            keyframes: {
+                marquee: {
+                    from: { transform: 'translateX(0)' },
+                    to: { transform: 'translateX(-50%)' },
+                },
+            },
+            animation: {
+                marquee: 'marquee 32s linear infinite',
             },
         },
     },
